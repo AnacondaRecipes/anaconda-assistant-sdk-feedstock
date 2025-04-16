@@ -10,25 +10,27 @@ source:
   sha256: 1bf4b513bab7402faa126874e2ef0c2adb5ddd8a8484c320b239cad4a01c4ad0
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - hatchling
     - hatch-vcs >=0.3
     - setuptools-scm >=7.1
     - pip
   run:
-    - python >={{ python_min }}
+    - python
     - anaconda-auth >=0.8
     - anaconda-cli-base >=0.5
     - pydantic
   run_constrained:
     - langchain-core >=0.3
     - llm >=0.22
+    - pandasai >=2.4
+    - panel >=1.6
 
 test:
   imports:
@@ -36,15 +38,17 @@ test:
   commands:
     - pip check
   requires:
-    - python {{ python_min }}
     - pip
 
 about:
   summary: The Anaconda Assistant Python client
-  doc_url: https://anaconda.github.io/assistant-sdk/sdk
-  dev_url: https://github.com/anaconda/assistant-sdk
+  description: |
+    The main Python SDK that provides clients for the API to send messages and receive replies.
   home: https://anaconda.com
+  doc_url: https://anaconda.github.io/assistant-sdk/sdk
+  dev_url: https://github.com/anaconda/assistant-sdk/tree/main/libs/anaconda-assistant-sdk
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
 
 extra:
