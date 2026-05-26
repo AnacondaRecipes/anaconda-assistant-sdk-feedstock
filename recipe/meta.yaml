@@ -44,6 +44,9 @@ test:
     - pip
     - pytest
     - pytest-mock
+    - responses
+    # Needed for fix pip check with error missing dependency anaconda-anon-usage:
+    - conda
 
 about:
   summary: The Anaconda Assistant Python client
